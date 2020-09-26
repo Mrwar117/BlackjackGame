@@ -22,6 +22,7 @@ public class BlackjackMain extends JFrame{
 	private int[] set = {1,2,3,4,5,6,7,8,9,10,10,10,10};
 	private ArrayList<Integer> playDeck = new ArrayList<Integer>();
 	private ArrayList<Integer> baseDeck = new ArrayList<Integer>();
+	private ArrayList<Integer> backDeck = new ArrayList<Integer>();
 	private ArrayList<Integer> playerHand = new ArrayList<Integer>();
 	private ArrayList<Integer> dealerHand = new ArrayList<Integer>();
 	private String[] commands = {"bet","deal","hit","stay","chips"};
@@ -35,6 +36,7 @@ public class BlackjackMain extends JFrame{
 				
 			}
 		}
+		backDeck = baseDeck;
 		System.out.println("Base Deck"+baseDeck);
 		this.setSize(600, 650);
 		this.setTitle("BlackJack");
@@ -149,9 +151,11 @@ public class BlackjackMain extends JFrame{
 	}
 	
 	public void shuffleDeck() {
+		baseDeck = backDeck;
 		for(int x =0;x<baseDeck.toArray().length;x++) {
 			int y = ThreadLocalRandom.current().nextInt(0,baseDeck.toArray().length);
 			playDeck.add(baseDeck.get(y));
+			baseDeck.remove(y);
 			
 		}
 		System.out.println("Post Shuffle "+playDeck);
